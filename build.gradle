@@ -1,0 +1,58 @@
+plugins {
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+}
+
+group = 'com.ilter.demo'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+
+ext {
+    set('springCloudVersion', "Hoxton.SR5")
+    set('rsocketVersion', "1.0.0")
+}
+
+
+subprojects {
+    sourceCompatibility = '1.8'
+
+    apply plugin: 'java'
+    apply plugin: 'io.spring.dependency-management'
+
+    repositories {
+        mavenLocal()
+        jcenter()
+        mavenCentral()
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/ilterpehlivan/rsocket-rpc")
+            credentials {
+                username = project.findProperty("gpr.user") ?: System.getenv("GPR_USER")
+                password = project.findProperty("gpr.read.key") ?: System.getenv("GPR_API_KEY")
+            }
+        }
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+            mavenBom "com.google.protobuf:protobuf-bom:3.11.1"
+        }
+    }
+
+    configurations {
+        all*.exclude module : 'slf4j-simple'
+        compile.exclude module: 'spring-boot-starter-reactor-netty'
+    }
+
+}
+
+test {
+    useJUnitPlatform()
+}
+
+
+task allDeps(type: DependencyReportTask) {}

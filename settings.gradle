@@ -1,0 +1,3 @@
+include 'svc-idl'
+include 'demo-client'
+include 'demo-server'
