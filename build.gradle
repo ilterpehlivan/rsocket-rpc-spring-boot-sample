@@ -32,6 +32,7 @@ subprojects {
             credentials {
                 username = project.findProperty("gpr.user") ?: System.getenv("GPR_USER")
                 password = project.findProperty("gpr.read.key") ?: System.getenv("GPR_API_KEY")
+                println("username $username password $password")
             }
         }
     }
