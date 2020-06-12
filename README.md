@@ -16,8 +16,11 @@ docker-compose -f <docker-compose-external-yml-in-repo> up -d
 4. start client (right click client main class and run)
 5. test it with curl
 ```
-curl localhost:8080/sample/hello
+curl localhost:8082/sample/hello
 ```
+
+> :warning: You need to set active spring profile from the IDEA as 
+> **`-Dspring.profiles.active=local`**
 
 ## With docker build
 
@@ -31,6 +34,16 @@ curl localhost:8080/sample/hello
 ```docker
 docker-compose -f <docker-compose-yml-in-repo> up -d
 ```
+3. test it with curl
+```
+curl localhost:8080/sample/hello
+```
+
+## API Operations
+API | RPC Mapping
+------------ | -------------
+/sample/hello | RequestReply
+/sample/hello-stream | RequestStream
 
 # Monitoring apps
 * Tracing Server (Zipkin) - http://localhost:9411/zipkin/
