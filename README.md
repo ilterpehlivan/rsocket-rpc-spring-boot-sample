@@ -2,8 +2,8 @@
 sample spring boot project for rpc communication
 
 
-#How to run apps
-##With Idea
+# How to run apps
+## With Idea
 1. Build
 ```
 gradle clean build
@@ -19,7 +19,7 @@ docker-compose -f <docker-compose-external-yml-in-repo> up -d
 curl localhost:8080/sample/hello
 ```
 
-##With docker build
+## With docker build
 
 1. Build and generate docker images
 
@@ -32,7 +32,7 @@ curl localhost:8080/sample/hello
 docker-compose -f <docker-compose-yml-in-repo> up -d
 ```
 
-#Monitoring apps
+# Monitoring apps
 * Tracing Server (Zipkin) - http://localhost:9411/zipkin/
 * Grafana Dashboards - http://localhost:3000
 * Prometheus - http://localhost:9091 
