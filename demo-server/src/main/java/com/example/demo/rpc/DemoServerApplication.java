@@ -26,7 +26,7 @@ public class DemoServerApplication implements CommandLineRunner {
   @Override
   public void run(String... args) throws Exception {
     RpcServer server =
-        RsocketServerBuilder.forPort(9090)
+        RsocketServerBuilder.forPort(servicePort)
             .addService(new SimpleServiceImpl())
 //            .withMetrics(meterRegistry)
             .interceptor(RSocketTracing.create(tracing).newServerInterceptor())

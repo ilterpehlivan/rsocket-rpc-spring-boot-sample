@@ -27,8 +27,7 @@ public class ServiceConfig {
   public RsocketSimpleServiceStub getSimpleClientStub() {
     if (simpleServiceStub == null) {
       RsocketClientBuilder clientBuilder =
-          RsocketClientBuilder.forAddress("localhost", 9090)
-              .withLoadBalancing()
+          RsocketClientBuilder.forAddress(serviceAddress, servicePort)
               .withMetrics(meterRegistry)
               .interceptor(RSocketTracing.create(tracing).newClientInterceptor());
       simpleServiceStub = RsocketSimpleServiceRpc.newReactorStub(clientBuilder);

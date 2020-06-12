@@ -1,6 +1,7 @@
 plugins {
 	id 'org.springframework.boot' version '2.3.0.RELEASE'
 	id 'java'
+	id 'com.google.cloud.tools.jib'
 }
 
 group = 'com.ilter.demo'
@@ -27,8 +28,10 @@ dependencies{
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis-reactive'
 	runtimeOnly 'com.h2database:h2'
 	implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+	implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	compile 'io.micrometer:micrometer-registry-atlas:latest.release'
+//	compile 'io.micrometer:micrometer-registry-atlas:latest.release'
+	compile 'io.micrometer:micrometer-registry-prometheus:latest.release'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 //	implementation "io.rsocket:rsocket-transport-netty:$rsocketVersion"
@@ -55,4 +58,15 @@ dependencies{
 
 test {
 	useJUnitPlatform()
+}
+
+jib {
+	to {
+		image = "${project.name}:${version}"
+		tags = ['latest']
+	}
+	container {
+		user = "1002"
+	}
+	allowInsecureRegistries = true
 }

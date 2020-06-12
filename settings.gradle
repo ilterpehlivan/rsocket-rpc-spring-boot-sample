@@ -1,3 +1,9 @@
+pluginManagement {
+    plugins {
+        id 'com.google.cloud.tools.jib' version "2.1.0" apply false
+    }
+}
+
 include 'svc-idl'
 include 'demo-client'
 include 'demo-server'

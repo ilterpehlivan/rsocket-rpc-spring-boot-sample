@@ -33,8 +33,8 @@ public class SampleController {
         .doFinally(
             signalType -> {
               log.info("doFinally:signal {} .. printing metrics",signalType);
-//              printClientMetrics("request.RequestReply");
-              printAllMetrics();
+              printClientMetrics("request.requestReply");
+//              printAllMetrics();
             });
   }
 
